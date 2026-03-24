@@ -264,8 +264,9 @@ function processCloudLogs(message, metadata) {
 
 ## 🪵 Step 3: Create the Log Router Sink
 
-Configure Cloud Logging to push relevant logs to your Pub/Sub topic.
+Configure Cloud Logging to push relevant logs to your Pub/Sub topic. 
 
+For example:
 ```bash
 gcloud logging sinks create cloud-logging-pubsub-log-sink \
     pubsub.googleapis.com/projects/cloud-logging-bq-demo/topics/cloud-logs-ingestion-topic \
@@ -304,13 +305,12 @@ PUBSUB_SERVICE_ACCOUNT="service-${PROJECT_NUMBER}@gcp-sa-pubsub.iam.gserviceacco
 
 echo "Granting permissions for: $PUBSUB_SERVICE_ACCOUNT"
 
-
-# 4. Grant Pub/Sub Publisher on the Dead Letter Topic
+# 3. Grant Pub/Sub Publisher on the Dead Letter Topic
 gcloud pubsub topics add-iam-policy-binding cloud-logs-dlq-topic \
     --member="serviceAccount:$PUBSUB_SERVICE_ACCOUNT" \
     --role="roles/pubsub.publisher"
 
-# 5. Grant Pub/Sub Subscriber on the BigQuery Subscription
+# 4. Grant Pub/Sub Subscriber on the BigQuery Subscription
 gcloud pubsub subscriptions add-iam-policy-binding cloud-logs-bq-sub \
     --member="serviceAccount:$PUBSUB_SERVICE_ACCOUNT" \
     --role="roles/pubsub.subscriber"
