@@ -322,6 +322,9 @@ gcloud logging write test-log '{"test_field": "trigger", "status": 1.0}' \
     --payload-type=json \
     --severity=INFO
 ```
+
+![Alt text](screenshot01.png)
+
 ---
 
 ## 📈 Step 5: Monitoring and Maintenance
